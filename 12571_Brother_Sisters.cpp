@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
         }
     }
 
-    unordered_map<int, int> cache;
+
     
     int n, q, a;
     int ans = 0;
@@ -35,6 +35,9 @@ int main(int argc, char const *argv[])
     
         cin >> n >> q;
         int x[n];
+        int cache[230];
+
+        for (int i = 0; i < 230; i++) cache[i] = 512; // any number that won't appear.  
 
         for (int i = 0; i < n; i++) {
             cin >> x[i];
@@ -44,7 +47,7 @@ int main(int argc, char const *argv[])
             ans = 0;
             cin >> a;
 
-            if (cache.find(a) != cache.end()) {
+            if (cache[a] != 512) {
                 ans = cache[a];
             }
             else {
