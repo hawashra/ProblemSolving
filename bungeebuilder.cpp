@@ -1,0 +1,91 @@
+#include <bits/stdc++.h>
+#define ALL(x) x.begin(), x.end()
+#define FAST std::cin.tie(0); ios::sync_with_stdio(false); std::cout.tie(0);
+using namespace std;
+#define min(a,b) (a < b) ? (a) : (b)
+#define max(a,b) (a > b) ? (a) : (b)
+#define vii vector<pair<int,int>>
+#define ii pair<int, int>
+#define ll long long
+#define endl '\n'
+#define TC int t; cin >> t; while (t--)
+
+void solve() {
+    cout << "Hi"; 
+}
+
+int main(int argc, char const *argv[])
+{   
+    FAST
+    int N;
+    cin >> N;
+    int arr[N];
+    for (int i=0; i<N;i++) cin >> arr[i];
+    
+    stack<int> bricks;
+    bricks.push(arr[0]);
+    int first = arr[0];
+    int mini = 1000000001;
+    int ans = 0;
+    int i;
+
+    for (i = 1; i < N; i++) {
+
+        if (arr[i] >= first) {
+
+            while (bricks.size() > 1) {
+                mini = min(mini, bricks.top());
+                bricks.pop();
+            }
+
+            if ( first - mini > ans) {
+                ans = first - mini;
+            }
+
+            bricks.pop();
+            bricks.push(arr[i]);
+            first = arr[i];
+            mini=1000000001;
+        }
+
+        else {
+            bricks.push(arr[i]);
+        }
+    }
+
+    
+    first = arr[N-1];
+    mini=1000000001;
+    while(!bricks.empty()) bricks.pop();
+
+    bricks.push(arr[N-1]);
+
+    for (i = N-2; i >= 0; i--) {
+
+        if (arr[i] >= first) {
+
+            while (bricks.size() > 1) {
+                mini = min(mini, bricks.top());
+                bricks.pop();
+            }
+
+            if ( first - mini > ans) {
+                ans = first - mini;
+            }
+
+            bricks.pop();
+            bricks.push(arr[i]);
+            first = arr[i];
+            mini=1000000001;
+        }
+
+        else {
+            bricks.push(arr[i]);
+        }
+    }
+
+    cout << ans << endl;
+
+
+    return 0;
+}
